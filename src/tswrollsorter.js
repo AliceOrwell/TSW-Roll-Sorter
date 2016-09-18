@@ -82,12 +82,10 @@ var tswrollsorter = {
 		return text;
 	},
 
-	process: function() {
-		var chat_text = document.getElementById("input").value;
-		
+	process: function(chat_text) {
 		var rolls = tswrollsorter.extract(chat_text);
 		if (rolls.length == 0) {
-			return;
+			return "";
 		}
 
 		rolls = tswrollsorter.filter(rolls);
@@ -95,7 +93,7 @@ var tswrollsorter = {
 		var condensed_rolls = tswrollsorter.condense(rolls);
 		var formated_text = tswrollsorter.format(condensed_rolls);
 
-		document.getElementById("output").value = formated_text;
+		return formated_text;
 	},
 
 	sort: function(data) {
