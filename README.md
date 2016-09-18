@@ -8,7 +8,9 @@ A live version of the project can be found at: https://aliceorwell.github.io/TSW
 Structure
 ------------
 `/public/` - The web interface.
+
 `/src/` - The javascript library.
+
 `/test/` - Basic unit testing for the javascript library.
 
 Contributing
