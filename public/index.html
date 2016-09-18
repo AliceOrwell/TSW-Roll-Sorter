@@ -33,22 +33,23 @@
 
 		<form>
 			<label for="input">Input:</label>
-			<textarea name="input" id="input" rows="10" cols="50">[03:41] Person1 rolled a 27.
-[03:41] Person2 rolled a 39.
-[03:41] Person3 rolled a 99.
-[03:41] Person2 rolled a 46.
-[03:41] Person4 rolled a 99.
-[03:41] Person5 rolled a 97.</textarea>
+			<textarea name="input" id="input" rows="10" cols="50"></textarea>
 			
 			<label for="output">Output:</label>
 			<textarea name="output" id="output" rows="10" cols="50"></textarea>
 
 			<br />
-			<input type="submit" id="submit" value="Process" onclick="tswrollsorter.process()">
+			<input type="submit" id="submit" value="Process" onclick="process()">
 		</form>
 		
-		<script src="tswrollsorter.js"></script>
+		<script src="../src/tswrollsorter.js"></script>
 		<script>
+			function process() {
+				var chat_text = document.getElementById("input").value;
+				var formated_text = tswrollsorter.process(chat_text);
+				document.getElementById("output").value = formated_text;
+			}
+
 			window.onload = function(e) {
 				var ele = document.getElementById("submit");
 				if (ele) {
