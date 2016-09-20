@@ -22,8 +22,11 @@ var tswrollsorter = {
 		var rolls = [];
 
 		var match;
-		var pattern = /(\S*) rolled a (\d{1,3})\.\n?/g;
+		var pattern = /^(?:\[\d?\d:\d\d\] )?([a-zA-Z0-9-]*) rolled a (100|[1-9][0-9]|[1-9])\./gm;
 		while (match = pattern.exec(chat_text)) {
+			if (match[1] === "") {
+				return rolls;
+			}
 			var entry = { person: match[1], roll: match[2] };
 			rolls.push(entry);
 		}
@@ -77,17 +80,23 @@ var tswrollsorter = {
 	},
 
 	format: function(rolls) {
+		if (rolls.length == 0) {
+			return "0 Rolls found."
+		}
+		
+		var roll_text = " Rolls: ";
+		if (rolls.length == 1) {
+			roll_text = " Roll: "
+		}
+
+
 		var data = tswrollsorter.format_rolls(rolls);
-		var text = data.num_rolls + " Rolls: " + data.text;
+		var text = data.num_rolls + roll_text + data.text;
 		return text;
 	},
 
 	process: function(chat_text) {
 		var rolls = tswrollsorter.extract(chat_text);
-		if (rolls.length == 0) {
-			return "";
-		}
-
 		rolls = tswrollsorter.filter(rolls);
 		rolls = tswrollsorter.sort(rolls);
 		var condensed_rolls = tswrollsorter.condense(rolls);
