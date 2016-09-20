@@ -35,6 +35,15 @@ QUnit.test("roll sent to channel", function(assert) {
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
+QUnit.test("roll mentioned in a message", function(assert) {
+	var data = '[04:36][Person] I think Person2 rolled a 1.\n' +
+		'[Person] I think Person2 rolled a 1.\n' +
+		'[Channel][Person] I think Person2 rolled a 1.\n' +
+		'[04:36][Channel][Person] I think Person2 rolled a 1.\n';
+	var expected = [];
+	assert.deepEqual(tswrollsorter.extract(data), expected);
+});
+
 QUnit.test("invalid roll of 0", function(assert) {
 	var data = '[04:36] Person rolled a 0.';
 	var expected = [];
@@ -42,9 +51,8 @@ QUnit.test("invalid roll of 0", function(assert) {
 });
 
 QUnit.test("numbers of digit range", function(assert) {
-	// Test numbers of digit range
 	var data = '[04:36] Person rolled a 3.\n' +
-		'[04:36] Person rolled a 82.' +
+		'[04:36] Person rolled a 82.\n' +
 		'[04:36] Person rolled a 100.';
 	var expected = [
 		{person: "Person", roll: "3"},
@@ -54,10 +62,9 @@ QUnit.test("numbers of digit range", function(assert) {
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
-QUnit.test("with timestamp + newline", function(assert) {
-	// Test with timestamp + newline
+QUnit.test("with timestamp", function(assert) {
 	var data = '[04:36] Person rolled a 39.\n' +
-		'[04:36] Person rolled a 82.';
+		'[4:36] Person rolled a 82.';
 	var expected = [
 		{person: "Person", roll: "39"},
 		{person: "Person", roll: "82"}
@@ -65,8 +72,7 @@ QUnit.test("with timestamp + newline", function(assert) {
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
-QUnit.test("without timestamp + newline", function(assert) {
-	// Test without timestamp + newline
+QUnit.test("without timestampe", function(assert) {
 	var data = 'Person rolled a 39.\n' +
 		'Person rolled a 82.';
 	var expected = [
@@ -76,31 +82,8 @@ QUnit.test("without timestamp + newline", function(assert) {
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
-QUnit.test("with timestamp + no newline", function(assert) {
-	// Test with timestamp + no newline
-	var data = '[04:36] Person rolled a 39.' +
-		'[04:36] Person rolled a 82.';
-	var expected = [
-		{person: "Person", roll: "39"},
-		{person: "Person", roll: "82"}
-	];
-	assert.deepEqual(tswrollsorter.extract(data), expected);
-});
-
-QUnit.test("without timestamp + no newline", function(assert) {	
-	// Test without timestamp + no newline
-	var data = 'Person rolled a 39.' +
-		'Person rolled a 82.';
-	var expected = [
-		{person: "Person", roll: "39"},
-		{person: "Person", roll: "82"}
-	];
-	assert.deepEqual(tswrollsorter.extract(data), expected);
-});
-
 QUnit.test("names with numbers and hyphens", function(assert) {
-	// Test names with numbers and hyphens
-	var data = 'Per-son rolled a 39.' +
+	var data = 'Per-son rolled a 39.\n' +
 		'Per100son rolled a 82.';
 	var expected = [
 		{person: "Per-son", roll: "39"},
@@ -111,7 +94,6 @@ QUnit.test("names with numbers and hyphens", function(assert) {
 
 QUnit.module( "tswrollsorter.filter" );
 QUnit.test("remove duplicate", function(assert) {
-	// Test remove duplicate
 	var data = [
 		{person: "Person5", roll: "10"},
 		{person: "Person", roll: "60"},

@@ -22,8 +22,11 @@ var tswrollsorter = {
 		var rolls = [];
 
 		var match;
-		var pattern = /(\S*) rolled a (\d{1,3})\.\n?/g;
+		var pattern = /^(?:\[\d?\d:\d\d\] )?([a-zA-Z0-9-]*) rolled a (\d{1,3})\./gm;
 		while (match = pattern.exec(chat_text)) {
+			if (match[1] === "" || match[2] < 1) {
+				return rolls;
+			}
 			var entry = { person: match[1], roll: match[2] };
 			rolls.push(entry);
 		}
