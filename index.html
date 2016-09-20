@@ -39,11 +39,11 @@
 				float: left;
 				padding-right: 1em;
 				text-align: left;
-				width: 20%;
+				width: 25%;
 			}
 			.rightpanel {
 				display: inline-block;
-				width: 75%;
+				width: 70%;
 			}
 
 			.example {
@@ -69,7 +69,7 @@
 				width: 40%;
 			}
 			.example .output {
-				width: 50%;
+				width: 48%;
 			}
 			.example .spacer {
 				display: inline-block;
@@ -89,20 +89,22 @@
 		</div>
 		
 		<div class="leftpanel">
+			<h2>About</h2>
+			<p>This is a simple web interface to organise and filter /rolls for the videogame <a href="http://www.thesecretworld.com/">The Secret World</a> (TSW), a MMORPG by <a href="http://www.funcom.com/">Funcom</a>.</p>
+
 			<h2>Instructions</h2>
 			<p>Copy &amp; paste the rolls you wish to sort from your TSW chat window into the Input box. Your rolls will automatically process and appear in the Output box. If your content contains information likely to fool the processor (see Cautions) manually remove the offending lines from the Input box and click the "Process" button.</p>
 			
 			<h2>Features</h2>
 			<ul>
 				<li>Sort rolls</li>
-				<li>Number of rolls found</li>
 				<li>Group people with duplicate roll values.</li>
-				<li>Filter someone multi-rolling.</li>
-				<li>Basic filtering of irrelevant chat messages.</li>
+				<li>Filters someone multi-rolling, only takes their first roll.</li>
+				<li>Filters irrelevant chat messages, including Tell and Channel messages that mention rolls.</li>
 			</ul>
 			
 			<h2>Caution</h2>
-			<p>Processor is unable to exclude rolls done with a command such as /emote (e.g. '/emote rolled a 100.') so take care to manually remove that type of content.</p>
+			<p>Processor is unable to exclude rolls done with a command such as /emote (e.g. '/emote rolled a 100.') so take care to manually remove that type of content. For this reason it highly recommended to use a chat tab that is only subscribed to Loot Rolls as a source for your roll data.</p>
 		</div>
 		<div class="rightpanel">
 			<form>
