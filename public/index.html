@@ -5,62 +5,76 @@
 			body {
 				font-family: Tahoma,Calibri,Verdana,Geneva,sans-serif;
 				font-size: 0.9em;
+				max-width: 1100px;
+				min-width: 800px;
+				margin: 0 auto;
 				text-align: center;
 			}
-			form {
-				margin-bottom: 20px;
+			h2 {
+				text-align: left;
 			}
-			#header h1 {
-				margin-bottom:0;
+			p {
+				text-align: justify;
 			}
-			#header div {
-				text-align: center;
-			}
-			label {
+
+			form label {
 				display: inline-block;
 				text-align: right;
 				vertical-align: top;
-				width: 3.8em;
+				width: 6%;
 			}
-			#submit {
+			form textarea {
+				box-sizing: border-box;
+				font-family: monospace;
+				font-size: 90%;
+				width: 90%;
+			}
+			form #submit {
 				font-size: 1em;
 				margin-top: 10px;
 			}
-			.subnote {
-				font-size: 0.6em;
-			}
-			textarea {
-				font-family: monospace;
-				font-size: 0.9em;
-			}
+
 			.leftpanel {
 				display: inline-block;
 				float: left;
+				padding-right: 1em;
 				text-align: left;
-				width: 30%;
+				width: 20%;
 			}
 			.rightpanel {
 				display: inline-block;
-				width: 70%;
+				width: 75%;
+			}
+
+			.example {
+				text-align: left;
 			}
 			.example div {
-				border: thin dashed green;
 				display: inline-block;
-				font-size: 0.8em;
-				height: 7em;
+				font-family: monospace;
+				font-size: 0.9em;
+				min-height: 7em;
 				margin: 0.5em 0.2em;
 				padding: 0.6em;
 				text-align: left;
 				vertical-align: top;
 			}
+			.example .bad {
+				border: thin dashed red;
+			}
+			.example .good {
+				border: thin dashed green;
+			}
 			.example .input {
-				width: 30%;
+				width: 40%;
 			}
 			.example .output {
 				width: 50%;
 			}
 			.example .spacer {
-				vertical-align: middle;
+				display: inline-block;
+				margin-top: 3em;
+				width: 2%;
 			}
 		</style>
 
@@ -71,69 +85,78 @@
 		<a href="https://github.com/AliceOrwell/TSW-Web-Roll-Sorter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 		<div id="header">
-			<h1>TSW Roll Sorter <span class="subnote">v1.0</span></h1>
-			<div class="subnote">Created by AliceOrwell.</div>
-			
+			<h1>TSW Roll Sorter</h1>
 		</div>
-
-		<div>
-			<h2>Instructions</h2>
-			<p>Copy &amp; paste the rolls you wish to sort from your TSW chat window into the input box. Take care to remove unnessecary messages. Click the
-			'Process' button and your results will appear in the Output box.</p>
-		</div>
-
-		<form>
-			<div>
-				<label for="input">Input:</label>
-				<textarea name="input" id="input" rows="10" cols="70" onpaste="paste()"></textarea>
-			</div>
-			<div>
-				<label for="output">Output:</label>
-				<textarea name="output" id="output" rows="5" cols="70"></textarea>
-			</div>
-
-			<input type="submit" id="submit" value="Process" onclick="process()">
-		</form>
 		
 		<div class="leftpanel">
+			<h2>Instructions</h2>
+			<p>Copy &amp; paste the rolls you wish to sort from your TSW chat window into the Input box. Your rolls will automatically process and appear in the Output box. If your content contains information likely to fool the processor (see Cautions) manually remove the offending lines from the Input box and click the "Process" button.</p>
+			
 			<h2>Features</h2>
 			<ul>
 				<li>Sort rolls</li>
 				<li>Number of rolls found</li>
-				<li>Gooup people with duplicate roll values.</li>
+				<li>Group people with duplicate roll values.</li>
 				<li>Filter someone multi-rolling.</li>
 				<li>Basic filtering of irrelevant chat messages.</li>
 			</ul>
+			
+			<h2>Cautions</h2>
+			<p>Unable to differentiate	with rolls pasted to chat, tells, or joke rolls down with /emote (e.g. '/emote rolled a 100.') so take care to manually remove that type of content.</p>
 		</div>
 		<div class="rightpanel">
+			<form>
+				<div>
+					<label for="input">Input:</label>
+					<textarea name="input" id="input" rows="10" cols="70" onpaste="paste()"></textarea>
+				</div>
+				<div>
+					<label for="output">Output:</label>
+					<textarea name="output" id="output" rows="5" cols="70"></textarea>
+				</div>
+
+				<input type="submit" id="submit" value="Process" onclick="process()">
+			</form>
+
 			<h2>Examples</h2>
-			
 			<div class="example">
-				<div class="input">
+				<div class="input good">
 					AliceOrwell rolled a 12.<br />
 					KangaRue rolled a 100.<br />
 					Daigon-Jude rolled a 24.<br />
-					Daigon-Jude rolled a 29.<br />
+					BigMiz rolled a 29.<br />
 					Daigon-Jude rolled a 90.
 				</div>
-				<span>-&gt;</span>
-				<div class="output">
-					3 Rolls: KangaRue (100) -- Daigon-Jude (24) -- AliceOrwell (12)
+				<span class="spacer">-&gt;</span>
+				<div class="output good">
+					4 Rolls: KangaRue (100) -- BigMiz (29) -- Daigon-Jude (24) -- AliceOrwell (12)
 				</div>
 			</div>
 			<div class="example">
-				<div class="input">
+				<div class="input good">
 					[14:25] AWOL rolled a 54.<br />
-					[14:26] Lady-Pyre rolled a 24.<br />
-					[14:27] Omega-14 rolled a 54.<br />
-					[14:27] Hlopushka rolled a 92.
+					[14:25] You received [Sacred fire] x 3<br />
+					[14:26][Raid][*LazyDude]: yay<br />
+					[14:26] Hlopushka rolled a 92.<br />
+					[14:26] Akkikins rolled a 54.<br />
 				</div>
-				<span>-&gt;</span>
-				<div class="output">
-					4 Rolls: Hlopushka (92) -- AWOL + Omega-14 (54) -- Lady-Pyre (24)
+				<span class="spacer">-&gt;</span>
+				<div class="output good">
+					3 Rolls: Hlopushka (92) -- AWOL + Akkikins (54)
 				</div>
+			</div>
+			<div class="example">
+				<div class="input bad">
+					[14:26][#event][*Alice]: RIP. Bob rolled a 99.<br />
+					[14:26][#event][*Alice]: MT<br />
+					[14:26][John] I zoned out but I rolled a 100.
+				</div>
+				<span class="spacer">-&gt;</span>
+				<div class="output bad">
+					2 Rolls: Bob (99) -- I (100)
+				</div>
+			</div>
 		</div>
-
 		
 		<script src="../src/tswrollsorter.js"></script>
 		<script>
