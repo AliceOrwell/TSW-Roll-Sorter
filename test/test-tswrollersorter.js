@@ -234,7 +234,7 @@ QUnit.test("2 rolls", function(assert) {
 QUnit.module( "tswrollsorter.process" );
 QUnit.test("No text", function(assert) {
 	var data = "";
-	var expected = "";
+	var expected = "0 Rolls found.";
 
 	assert.deepEqual(tswrollsorter.process(data), expected);
 });
@@ -244,6 +244,13 @@ QUnit.test("Valid rolls", function(assert) {
 		'[04:36] Person rolled a 82.' +
 		'[04:36] Person rolled a 100.';
 	var expected = "1 Rolls: Person (3)";
+
+	assert.deepEqual(tswrollsorter.process(data), expected);
+});
+
+QUnit.test("No valid rolls", function(assert) {
+	var data = '[04:36] Person rolled a barrel.';
+	var expected = "0 Rolls found.";
 
 	assert.deepEqual(tswrollsorter.process(data), expected);
 });

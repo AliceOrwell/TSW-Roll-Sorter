@@ -80,6 +80,9 @@ var tswrollsorter = {
 	},
 
 	format: function(rolls) {
+		if (rolls.length == 0) {
+			return "0 Rolls found."
+		}
 		var data = tswrollsorter.format_rolls(rolls);
 		var text = data.num_rolls + " Rolls: " + data.text;
 		return text;
@@ -87,10 +90,6 @@ var tswrollsorter = {
 
 	process: function(chat_text) {
 		var rolls = tswrollsorter.extract(chat_text);
-		if (rolls.length == 0) {
-			return "";
-		}
-
 		rolls = tswrollsorter.filter(rolls);
 		rolls = tswrollsorter.sort(rolls);
 		var condensed_rolls = tswrollsorter.condense(rolls);
