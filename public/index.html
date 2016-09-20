@@ -4,14 +4,63 @@
 		<style>
 			body {
 				font-family: Tahoma,Calibri,Verdana,Geneva,sans-serif;
-				text-align:center;
-				}
+				font-size: 0.9em;
+				text-align: center;
+			}
+			form {
+				margin-bottom: 20px;
+			}
 			#header h1 {
 				margin-bottom:0;
 			}
-			#author, #version {
-				font-size: 11px;
+			#header div {
 				text-align: center;
+			}
+			label {
+				display: inline-block;
+				text-align: right;
+				vertical-align: top;
+				width: 3.8em;
+			}
+			#submit {
+				font-size: 1em;
+				margin-top: 10px;
+			}
+			.subnote {
+				font-size: 0.6em;
+			}
+			textarea {
+				font-family: monospace;
+				font-size: 0.9em;
+			}
+			.leftpanel {
+				display: inline-block;
+				float: left;
+				text-align: left;
+				width: 30%;
+			}
+			.rightpanel {
+				display: inline-block;
+				width: 70%;
+			}
+			.example div {
+				border: thin dashed green;
+				display: inline-block;
+				font-size: 0.8em;
+				height: 7em;
+				margin: 0.5em 0.2em;
+				padding: 0.6em;
+				text-align: left;
+				vertical-align: top;
+			}
+			.example .input {
+				width: 30%;
+			}
+			.example .output {
+				width: 50%;
+			}
+			.example .spacer {
+				vertical-align: middle;
 			}
 		</style>
 
@@ -19,13 +68,13 @@
 		<title>TSW Roll Sorter</title>
 	</head>
 	<body>
-		<div id="header">
-			<h1>TSW Roll Sorter</h1>
-			<div id="author">Created by AliceOrwell.</div>
-			<div id="version">v1.0</div>
-		</div>
-
 		<a href="https://github.com/AliceOrwell/TSW-Web-Roll-Sorter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+		<div id="header">
+			<h1>TSW Roll Sorter <span class="subnote">v1.0</span></h1>
+			<div class="subnote">Created by AliceOrwell.</div>
+			
+		</div>
 
 		<div>
 			<h2>Instructions</h2>
@@ -34,31 +83,79 @@
 		</div>
 
 		<form>
-			<label for="input">Input:</label>
-			<textarea name="input" id="input" rows="10" cols="50"></textarea>
-			
-			<label for="output">Output:</label>
-			<textarea name="output" id="output" rows="10" cols="50"></textarea>
+			<div>
+				<label for="input">Input:</label>
+				<textarea name="input" id="input" rows="10" cols="70" onpaste="paste()"></textarea>
+			</div>
+			<div>
+				<label for="output">Output:</label>
+				<textarea name="output" id="output" rows="5" cols="70"></textarea>
+			</div>
 
-			<br />
 			<input type="submit" id="submit" value="Process" onclick="process()">
 		</form>
 		
+		<div class="leftpanel">
+			<h2>Features</h2>
+			<ul>
+				<li>Sort rolls</li>
+				<li>Number of rolls found</li>
+				<li>Gooup people with duplicate roll values.</li>
+				<li>Filter someone multi-rolling.</li>
+				<li>Basic filtering of irrelevant chat messages.</li>
+			</ul>
+		</div>
+		<div class="rightpanel">
+			<h2>Examples</h2>
+			
+			<div class="example">
+				<div class="input">
+					AliceOrwell rolled a 12.<br />
+					KangaRue rolled a 100.<br />
+					Daigon-Jude rolled a 24.<br />
+					Daigon-Jude rolled a 29.<br />
+					Daigon-Jude rolled a 90.
+				</div>
+				<span>-&gt;</span>
+				<div class="output">
+					3 Rolls: KangaRue (100) -- Daigon-Jude (24) -- AliceOrwell (12)
+				</div>
+			</div>
+			<div class="example">
+				<div class="input">
+					[14:25] AWOL rolled a 54.<br />
+					[14:26] Lady-Pyre rolled a 24.<br />
+					[14:27] Omega-14 rolled a 54.<br />
+					[14:27] Hlopushka rolled a 92.
+				</div>
+				<span>-&gt;</span>
+				<div class="output">
+					4 Rolls: Hlopushka (92) -- AWOL + Omega-14 (54) -- Lady-Pyre (24)
+				</div>
+		</div>
+
+		
 		<script src="../src/tswrollsorter.js"></script>
 		<script>
-			function process() {
-				var chat_text = document.getElementById("input").value;
-				var formated_text = tswrollsorter.process(chat_text);
-				document.getElementById("output").value = formated_text;
+			function paste() {
+				// Paste event triggers before content updated so need
+				// brief delay.
+				setTimeout(function(){
+					process();
+				}, 0);
 			}
 
-			window.onload = function(e) {
-				var ele = document.getElementById("submit");
-				if (ele) {
-					ele.addEventListener("click", function(event){
-						event.preventDefault();
-					});
-				}
+			function process() {
+				var chat_text = document.getElementById("input").value;		// Get
+				var formated_text = tswrollsorter.process(chat_text);		// Process
+				document.getElementById("output").value = formated_text;	// Set
+			}
+
+			window.onload = function(e) {;
+				// Prevent submit button posting the form
+				document.getElementById("submit").addEventListener("click", function(event){
+					event.preventDefault();
+				});
 			}
 		</script>
 	</body>
