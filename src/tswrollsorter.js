@@ -1,3 +1,11 @@
+/**********************************************************
+	TSW Roll Sorter
+	https://github.com/AliceOrwell/TSW-Roll-Sorter/
+
+	Copyright (c) 2016 AliceOrwell
+	Released under the MIT license
+ **********************************************************/
+
 var tswrollsorter = {
 	condense: function(rolls) {
 		var out = [];
