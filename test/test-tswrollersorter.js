@@ -13,9 +13,22 @@ QUnit.test("matches people with same roll", function(assert) {
 
 QUnit.module("tswrollsorter.extract");
 QUnit.test("invalid string", function(assert) {
-	// Test invalid string
 	var data = '[04:36] Person rolled a pineapple.\n' +
-		'[04:36] Person rolled a 8b2.';
+		'[04:36] Person rolled a 8b2.' +
+		'[04:36] Person rolled a 9000.' +
+		'[04:36] Person rolled a -1.';
+	var expected = [];
+	assert.deepEqual(tswrollsorter.extract(data), expected);
+});
+
+QUnit.test("roll sent in a tell", function(assert) {
+	var data = '[04:36][Person] rolled a 1.';
+	var expected = [];
+	assert.deepEqual(tswrollsorter.extract(data), expected);
+});
+
+QUnit.test("roll sent to channel", function(assert) {
+	var data = '[04:36][#event][Person] rolled a 1.';
 	var expected = [];
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
