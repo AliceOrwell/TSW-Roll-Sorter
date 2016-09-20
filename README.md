@@ -3,7 +3,7 @@ TSW Roll Sorter
 
 A library and simple web interface to sort /rolls for The Secret World (TSW), a MMORPG by Funcom.
 
-A live version of the project can be found at: https://aliceorwell.github.io/TSW-Web-Roll-Sorter/
+A live version of the project can be found at: https://aliceorwell.github.io/TSW-Roll-Sorter/
 
 Structure
 ------------
