@@ -83,8 +83,15 @@ var tswrollsorter = {
 		if (rolls.length == 0) {
 			return "0 Rolls found."
 		}
+		
+		var roll_text = " Rolls: ";
+		if (rolls.length == 1) {
+			roll_text = " Roll: "
+		}
+
+
 		var data = tswrollsorter.format_rolls(rolls);
-		var text = data.num_rolls + " Rolls: " + data.text;
+		var text = data.num_rolls + roll_text + data.text;
 		return text;
 	},
 

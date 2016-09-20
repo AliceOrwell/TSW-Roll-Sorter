@@ -290,7 +290,7 @@ QUnit.test("can format 1 roll", function(assert) {
 	var data = [
 		{ people: ["Person1"], roll: "28"}
 	];
-	var expected = "1 Rolls: Person1 (28)";
+	var expected = "1 Roll: Person1 (28)";
 	assert.deepEqual(tswrollsorter.format(data), expected);
 });
 
@@ -318,7 +318,7 @@ QUnit.test("Valid rolls", function(assert) {
 	var data = '[04:36] Person rolled a 3.\n' +
 		'[04:36] Person rolled a 82.\n' +
 		'Person rolled a 100.';
-	var expected = "1 Rolls: Person (3)";
+	var expected = "1 Roll: Person (3)";
 	assert.deepEqual(tswrollsorter.process(data), expected);
 });
 
