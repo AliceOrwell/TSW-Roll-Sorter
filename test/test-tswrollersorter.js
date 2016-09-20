@@ -22,13 +22,21 @@ QUnit.test("invalid string", function(assert) {
 });
 
 QUnit.test("roll sent in a tell", function(assert) {
-	var data = '[04:36][Person] rolled a 1.';
+	var data = '[04:36][Person] rolled a 1.\n' +
+		'[Person] rolled a 1.';
 	var expected = [];
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
 QUnit.test("roll sent to channel", function(assert) {
-	var data = '[04:36][#event][Person] rolled a 1.';
+	var data = '[04:36][#event][Person] rolled a 1.\n'+
+		'[#event][Person] rolled a 1.\n';
+	var expected = [];
+	assert.deepEqual(tswrollsorter.extract(data), expected);
+});
+
+QUnit.test("invalid roll of 0", function(assert) {
+	var data = '[04:36] Person rolled a 0.';
 	var expected = [];
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
