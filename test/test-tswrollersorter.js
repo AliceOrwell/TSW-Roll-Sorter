@@ -47,30 +47,30 @@ QUnit.test("ignore non-roll string", function(assert) {
 
 QUnit.test("ignore roll sent in messages", function(assert) {
 	// Tells
-	var data = '[04:36][Person] rolled a 1.';
+	var data = '[04:36][Person]: rolled a 1.';
 	var expected = [];
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
 	data = '[Person] rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
-	data = '[04:36][Person] I think Person2 rolled a 1.';
+	data = '[04:36][Person]: I think Person2 rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
 	data = '[Person] I think Person2 rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
 	// Channels
-	data = '[04:36][#event][Person] rolled a 1.';
+	data = '[04:36][#event][Person]: rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
-	data = '[#event][Person] rolled a 1.';
+	data = '[#event][Person]: rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 
-	data = '[Channel][Person] I think Person2 rolled a 1.';
+	data = '[Channel][Person]: I think Person2 rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 	
-	data = '[04:36][Channel][Person] I think Person2 rolled a 1.';
+	data = '[04:36][Channel][Person]: I think Person2 rolled a 1.';
 	assert.deepEqual(tswrollsorter.extract(data), expected);
 });
 
