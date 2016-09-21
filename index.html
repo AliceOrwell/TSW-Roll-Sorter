@@ -76,6 +76,14 @@
 				margin-top: 3em;
 				width: 2%;
 			}
+			
+			#javascriptnotice {
+				border: medium dashed red;
+				color: red;
+				font-weight: bold;
+				padding: 1em;
+				margin: 1em;
+			}
 		</style>
 
 		<meta charset="utf-8">
@@ -88,6 +96,10 @@
 			<h1>TSW Roll Sorter</h1>
 		</div>
 		
+		<div id="javascriptnotice">
+			This page requires Javascript. You're seeing this message as you have Javascript disabled. 
+		</div>
+
 		<div class="leftpanel">
 			<h2>About</h2>
 			<p>This is a simple web interface to organise and filter /rolls for the videogame <a href="http://www.thesecretworld.com/">The Secret World</a> (TSW), a MMORPG by <a href="http://www.funcom.com/">Funcom</a>.</p>
@@ -188,7 +200,10 @@
 				document.getElementById("output").value = formated_text;	// Set
 			}
 
-			window.onload = function(e) {;
+			window.onload = function(e) {
+				// Hide Javascript disabled notice
+				document.getElementById("javascriptnotice").style.display = 'none';
+
 				// Prevent submit button posting the form
 				document.getElementById("submit").addEventListener("click", function(event){
 					event.preventDefault();
