@@ -1,8 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<style>
+		<style type="text/css">
 			body {
+				background: #FFFFFF none repeat scroll 0 0;
 				font-family: Tahoma,Calibri,Verdana,Geneva,sans-serif;
 				font-size: 0.9em;
 				max-width: 1100px;
@@ -76,7 +77,7 @@
 				margin-top: 3em;
 				width: 2%;
 			}
-			
+
 			#javascriptnotice {
 				border: medium dashed red;
 				color: red;
@@ -95,9 +96,9 @@
 		<div id="header">
 			<h1>TSW Roll Sorter</h1>
 		</div>
-		
+
 		<div id="javascriptnotice">
-			This page requires Javascript. You're seeing this message as you have Javascript disabled. 
+			This page requires Javascript. You're seeing this message as you have Javascript disabled.
 		</div>
 
 		<div class="leftpanel">
@@ -106,7 +107,7 @@
 
 			<h2>Instructions</h2>
 			<p>Copy &amp; paste the rolls you wish to sort from your TSW chat window into the Input box. Your rolls will automatically process and appear in the Output box. If your content contains information likely to fool the processor (see Cautions) manually remove the offending lines from the Input box and click the "Process" button.</p>
-			
+
 			<h2>Features</h2>
 			<ul>
 				<li>Sort rolls.</li>
@@ -116,12 +117,12 @@
 				<li>Provides a count of the number of rolls found.</li>
 				<li>Works in Offline mode, save the page and it'll work from a local copy.</li>
 			</ul>
-			
+
 			<h2>Caution</h2>
 			<p>Processor is unable to exclude rolls done with a command such as /emote (e.g. '/emote rolled a 100.') so take care to manually remove that type of content. For this reason it highly recommended to use a chat tab that is only subscribed to Loot Rolls as a source for your roll data.</p>
 		</div>
 		<div class="rightpanel">
-			<form>
+			<form action="#">
 				<div>
 					<label for="input">Input:</label>
 					<textarea name="input" id="input" rows="10" cols="70" onpaste="paste()"></textarea>
@@ -172,7 +173,7 @@
 					0 Rolls found.
 				</div>
 			</div>
-			
+
 			<div class="example">
 				<div class="input bad">
 					[*John]: /emote rolled 100.<br />
@@ -184,9 +185,9 @@
 				</div>
 			</div>
 		</div>
-		
-		<script src="src/tswrollsorter.js"></script>
-		<script>
+
+		<script language="javascript" type="text/javascript" src="src/tswrollsorter.js"></script>
+		<script language="javascript" type="text/javascript">
 			function paste() {
 				// Paste event triggers before content updated so need
 				// brief delay.
